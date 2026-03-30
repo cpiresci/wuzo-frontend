@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wuzo Singularity | Painel de Controle</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>WUZO | Singularity Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #080808;
-            --panel-bg: #121212;
+            --bg-deep: #050505;
+            --panel-bg: #0d0d0d;
             --gold-matte: #D4AF37;
-            --gold-dim: #A68636;
-            --gold-glow: #F5E0A0;
-            --text-gray: #A0A0A0;
-            --cyan-accent: #00FFFF;
+            --gold-dim: #8c7224;
+            --cyan-status: #00f2ff;
+            --red-veto: #ff3333;
+            --text-gray: #a0a0a0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,225 +22,221 @@
             background-color: var(--bg-deep);
             color: var(--text-gray);
             font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden; /* Mantém a sensação de App fixo */
             height: 100vh;
-            overflow: hidden;
         }
 
+        /* Estrutura Principal */
         .dashboard-container {
-            width: 90%;
-            max-width: 1400px;
             display: grid;
-            grid-template-rows: 80px 1fr 200px;
+            grid-template-rows: 80px 1fr 250px;
+            height: 100vh;
+            padding: 20px;
             gap: 20px;
-            height: 90vh;
         }
 
+        /* Header - The Vault */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #1a1a1a;
+            padding: 0 10px;
         }
 
-        .logo {
+        .logo-wuzo {
             color: var(--gold-matte);
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 4px;
             text-transform: uppercase;
+        }
+
+        .net-worth {
+            text-align: center;
+        }
+
+        .net-worth h2 {
+            color: var(--gold-matte);
+            font-size: 2.2rem;
+            letter-spacing: -1px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .status-badge {
-            color: var(--cyan-accent);
-            font-size: 0.8rem;
+            color: var(--cyan-status);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .pulse {
-            width: 10px;
-            height: 10px;
-            background: var(--cyan-accent);
+            width: 8px;
+            height: 8px;
+            background: var(--cyan-status);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--cyan-accent);
+            box-shadow: 0 0 10px var(--cyan-status);
             animation: pulse-animation 2s infinite;
         }
 
+        /* Central - Swarm Stream */
         .main-engine {
-            background-color: var(--panel-bg);
+            background: var(--panel-bg);
             border: 1px solid #1a1a1a;
             border-radius: 4px;
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            padding: 20px;
-            gap: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .execution-feed {
+        .stream-log {
+            padding: 20px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             line-height: 1.6;
-            overflow-y: scroll;
-            color: var(--gold-dim);
+            height: 100%;
+            overflow-y: auto;
         }
 
-        .control-panel {
-            border-left: 1px solid #1a1a1a;
-            padding-left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .log-entry { margin-bottom: 8px; border-left: 2px solid #222; padding-left: 10px; }
+        .log-time { color: #444; margin-right: 10px; }
+        .tag-jusaii { color: var(--gold-matte); font-weight: bold; }
+        .tag-wuzo { color: var(--cyan-status); }
+        .tag-veto { color: var(--red-veto); }
 
-        .action-button {
-            background: transparent;
-            border: 1px solid var(--gold-matte);
-            color: var(--gold-matte);
-            padding: 15px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .action-button:hover {
-            background: var(--gold-matte);
-            color: #000;
-            box-shadow: 0 0 20px var(--gold-dim);
-        }
-
-        .asset-list {
+        /* Footer - Asset Distribution */
+        .assets-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
         .asset-card {
-            background-color: var(--panel-bg);
+            background: var(--panel-bg);
             border: 1px solid #1a1a1a;
             padding: 15px;
             border-radius: 4px;
         }
 
-        .asset-title {
-            color: var(--gold-matte);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+        .card-title {
+            color: var(--gold-dim);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
         }
+
+        .asset-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #151515;
+            font-size: 0.85rem;
+        }
+
+        .asset-value { color: white; font-weight: 500; }
 
         @keyframes pulse-animation {
             0% { opacity: 1; }
             50% { opacity: 0.3; }
             100% { opacity: 1; }
         }
+
+        /* Scrollbar Personalizada */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; }
     </style>
 </head>
 <body>
 
     <div class="dashboard-container">
+        
         <header>
-            <div class="logo">WUZO</div>
+            <div class="logo-wuzo">Wuzo</div>
+            <div class="net-worth">
+                <span class="card-title">Global Portfolio Value</span>
+                <h2>$ 3.320.770,80</h2>
+            </div>
             <div class="status-badge">
                 <div class="pulse"></div>
-                SINGULARITY CORE ONLINE
+                Swarm Engine Online
             </div>
         </header>
 
         <section class="main-engine">
-            <div class="execution-feed" id="log-feed">
-                > Sistema inicializado. Aguardando comando...<br>
-            </div>
-            <div class="control-panel">
-                <button class="action-button" onclick="iniciarMissao()">Iniciar Missão</button>
+            <div class="stream-log" id="log-container">
+                <div class="log-entry">
+                    <span class="log-time">09:58:12</span>
+                    <span class="tag-wuzo">[SYSTEM]:</span> Inicializando Motor de Singularidade... 32 agentes carregados.
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">09:58:14</span>
+                    <span class="tag-jusaii">[JUSAII]:</span> Auditoria de Matrícula #14502 iniciada.
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">09:58:18</span>
+                    <span class="tag-wuzo">[HFT_BOT]:</span> Escaneando pools de liquidez na rede Solana...
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">09:58:22</span>
+                    <span class="tag-jusaii">[JUSAII]:</span> ✅ Compliance Aprovado. Risco Jurídico: 2%.
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">09:58:25</span>
+                    <span class="tag-veto">[JUSAII]:</span> ❌ Veto: Token 'RugPull_Defi' rejeitado por vulnerabilidade no contrato.
+                </div>
             </div>
         </section>
 
-        <section class="asset-list">
+        <section class="assets-grid">
             <div class="asset-card">
-                <div class="asset-title">Net Worth Global</div>
-                $R\$ 18.520.770,80
+                <span class="card-title">Real World Assets (RWA)</span>
+                <div class="asset-item"><span>Imóvel RJ - Tokenizado</span> <span class="asset-value">$ 1.200.000,00</span></div>
+                <div class="asset-item"><span>Precatório Federal</span> <span class="asset-value">$ 450.000,00</span></div>
+                <div class="asset-item"><span>Recebíveis Ambev</span> <span class="asset-value">$ 85.200,00</span></div>
             </div>
             <div class="asset-card">
-                <div class="asset-title">Imóveis Tokenizados</div>
-                RWA-IMOB-14502
-            </div>
-            <div class="asset-card">
-                <div class="asset-title">Portfólio HFT</div>
-                452.12 SOL
+                <span class="card-title">Crypto Engine Assets (HFT)</span>
+                <div class="asset-item"><span>Solana (SOL) Pool</span> <span class="asset-value">452.12 SOL</span></div>
+                <div class="asset-item"><span>USDC Stablecoin</span> <span class="asset-value">$ 1.120.000,00</span></div>
+                <div class="asset-item"><span>Bitcoin (BTC) Reserve</span> <span class="asset-value">1.42 BTC</span></div>
             </div>
         </section>
+
     </div>
 
     <script>
-        const CORE_URL = "SUA_URL_DO_WUZO_CORE_NO_RENDER.com"; // <-- TROQUE PELA URL DO RENDER
-        const ADMIN_KEY = "wuzo_mestre_2026"; // <-- A CHAVE MESTRE DOapp.py
+        // Simulação de Logs em tempo real
+        const logs = [
+            { tag: "tag-wuzo", msg: "[HFT_BOT]: Arbitragem concluída em Raydium (+0.82 SOL)" },
+            { tag: "tag-jusaii", msg: "[JUSAII]: Certidão Negativa de Débitos extraída via API com sucesso." },
+            { tag: "tag-wuzo", msg: "[SYSTEM]: Rebalanceamento de portfólio executado automaticamente." },
+            { tag: "tag-veto", msg: "[JUSAII]: ⚠️ Alerta: Processo trabalhista detectado em proprietário de imóvel ID-99." }
+        ];
 
-        async function obterToken() {
-            try {
-                const response = await fetch(${CORE_URL}/api/core/gerar_token?admin_key=${ADMIN_KEY}, {
-                    method: 'POST'
-                });
-                const data = await response.json();
-                return data.access_token;
-            } catch (error) {
-                console.error("Erro na autenticação:", error);
-                logFeed("🛑 ERRO DE AUTENTICAÇÃO: Verifique a Admin Key.");
-            }
-        }
+        const logContainer = document.getElementById('log-container');
 
-        async function iniciarMissao() {
-            logFeed("🚀 Iniciando Missão Autônoma...");
-            const token = await obterToken();
+        setInterval(() => {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                            now.getMinutes().toString().padStart(2, '0') + ":" + 
+                            now.getSeconds().toString().padStart(2, '0');
             
-            if (!token) return;
+            const randomLog = logs[Math.floor(Math.random() * logs.length)];
+            
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            div.innerHTML = <span class="log-time">${timeStr}</span> <span class="${randomLog.tag}">${randomLog.msg.split(':')[0]}:</span> ${randomLog.msg.split(':')[1]};
+            
+            logContainer.appendChild(div);
+            logContainer.scrollTop = logContainer.scrollHeight;
 
-            const dadosOperacao = {
-                ativo_id: "LEBLON-AP-001",
-                tipo_ativo: "imovel",
-                valor_brl: 2500000.00,
-                contrato_uri: "ipfs://...",
-                matricula_uri: "ipfs://...",
-                solicitante_id: "cleiton_admin"
-            };
-
-            try {
-                const response = await fetch(${CORE_URL}/api/core/iniciar_operacao, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': Bearer ${token}
-                    },
-                    body: JSON.stringify(dadosOperacao)
-                });
-
-                const resultado = await response.json();
-                
-                if (response.status === 200) {
-                    logFeed(✅ SUCESSO! TX Solana: ${resultado.detalhes.tx_solana});
-                } else if (response.status === 403) {
-                    logFeed(❌ VETO JURÍDICO: ${resultado.detail});
-                } else {
-                    logFeed(🛑 FALHA CRÍTICA: ${resultado.detail});
-                }
-                
-            } catch (error) {
-                console.error("Erro na operação:", error);
-                logFeed("🛑 ERRO DE CONEXÃO: Verifique se o Core está online.");
-            }
-        }
-
-        function logFeed(message) {
-            const feed = document.getElementById('log-feed');
-            feed.innerHTML += > ${message}<br>;
-            feed.scrollTop = feed.scrollHeight;
-        }
+            if(logContainer.childElementCount > 50) logContainer.removeChild(logContainer.firstChild);
+        }, 4000);
     </script>
 </body>
 </html>
