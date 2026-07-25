@@ -1,7 +1,7 @@
 {
   "name": "wuzo-frontend",
   "private": true,
-  "version": "0.11.0-fase11a",
+  "version": "0.12.0-fase11b",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "i18next": "^23.15.1",
+    "react-i18next": "^15.0.2",
+    "i18next-browser-languagedetector": "^8.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",

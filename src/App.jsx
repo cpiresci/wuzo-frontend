@@ -1,17 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Ticker from "./components/Ticker";
+import Header from "./components/Header";
 
 export default function App() {
+  const { t } = useTranslation();
   return (
     <>
       <Ticker />
-      <div className="wz-shell">
-        <div className="wz-logo">WUZO</div>
-        <p className="wz-note">
-          Scaffold Vite/React da Fase 11a. Tema portado do <code>nexus-main</code> (paleta
-          dourado/preto, fonte Outfit, tokens de <code>:root</code>) e o ticker de mercado ao vivo
-          já funcional acima, consumindo <code>/api/market/ticker</code> com fallback pra Binance e
-          <code> /api/market/crypto</code>. Sem auth, sem estado de sessão — isso entra na 11c.
-        </p>
+      <div className="shell">
+        <Header />
+        <p className="wz-note">{t("shell_note")}</p>
       </div>
     </>
   );
