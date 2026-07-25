@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { fetchTickerItems } from "../lib/marketApi";
 
 const POLL_MS = 30000; // igual ao setInterval(updateTicker, 30000) original
@@ -12,6 +13,7 @@ const POLL_MS = 30000; // igual ao setInterval(updateTicker, 30000) original
  * texto livre de usuário nessa peça.
  */
 export default function Ticker() {
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
   const mounted = useRef(true);
 
@@ -42,7 +44,7 @@ export default function Ticker() {
             <div className="ticker-item" key={i} dangerouslySetInnerHTML={{ __html: item.html }} />
           ))
         ) : (
-          <div className="ticker-empty">Carregando mercado…</div>
+          <div className="ticker-empty">{t("ticker_loading")}</div>
         )}
       </div>
     </div>

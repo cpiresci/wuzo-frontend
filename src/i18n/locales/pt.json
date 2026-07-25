@@ -52,5 +52,6 @@
   "lang_label": "Idioma",
   "lang_instruction": "Responda em português do Brasil.",
   "shell_tagline": "RAIO-X DE CARTEIRA · 16 ESPECIALISTAS IA",
-  "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reais (detecção automática de idioma), ainda sem telas de negócio."
+  "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reais (detecção automática de idioma), ainda sem telas de negócio.",
+  "ticker_loading": "Carregando mercado…"
 }

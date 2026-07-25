@@ -52,5 +52,6 @@
   "lang_label": "Idioma",
   "lang_instruction": "Responde en español.",
   "shell_tagline": "RADIOGRAFÍA DE CARTERA · 16 ESPECIALISTAS IA",
-  "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reales (detección automática de idioma), todavía sin pantallas de negocio."
+  "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reales (detección automática de idioma), todavía sin pantallas de negocio.",
+  "ticker_loading": "Cargando mercado…"
 }

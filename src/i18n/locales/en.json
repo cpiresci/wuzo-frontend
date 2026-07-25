@@ -52,5 +52,6 @@
   "lang_label": "Language",
   "lang_instruction": "Respond in English.",
   "shell_tagline": "PORTFOLIO X-RAY · 16 AI SPECIALISTS",
-  "shell_note": "Vite/React scaffold — Phase 11b. Real shell and i18n (automatic language detection), still no business screens."
+  "shell_note": "Vite/React scaffold — Phase 11b. Real shell and i18n (automatic language detection), still no business screens.",
+  "ticker_loading": "Loading market data…"
 }
