@@ -48,10 +48,17 @@
   "err_server_wake": "⏳ Servidor acordando, aguarde...",
   "login_placeholder_email": "seu@email.com",
   "login_placeholder_pass": "Senha",
-  "reg_placeholder_pass": "Senha (mínimo 4 caracteres)",
+  "reg_placeholder_pass": "Senha (mínimo 8 caracteres)",
   "lang_label": "Idioma",
   "lang_instruction": "Responda em português do Brasil.",
   "shell_tagline": "RAIO-X DE CARTEIRA · 16 ESPECIALISTAS IA",
   "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reais (detecção automática de idioma), ainda sem telas de negócio.",
-  "ticker_loading": "Carregando mercado…"
+  "ticker_loading": "Carregando mercado…",
+  "err_login_fields": "Preencha email e senha.",
+  "err_reg_fields": "Preencha email e senha.",
+  "err_reg_pass_len": "Senha mínimo 8 caracteres.",
+  "err_login_default": "Email ou senha incorretos.",
+  "err_reg_default": "Erro ao criar conta.",
+  "err_no_connection": "Sem conexão. Tente novamente.",
+  "btn_sending": "Enviando..."
 }

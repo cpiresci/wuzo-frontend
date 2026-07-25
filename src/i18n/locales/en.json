@@ -48,10 +48,17 @@
   "err_server_wake": "⏳ Server starting up, please wait...",
   "login_placeholder_email": "your@email.com",
   "login_placeholder_pass": "Password",
-  "reg_placeholder_pass": "Password (minimum 4 characters)",
+  "reg_placeholder_pass": "Password (minimum 8 characters)",
   "lang_label": "Language",
   "lang_instruction": "Respond in English.",
   "shell_tagline": "PORTFOLIO X-RAY · 16 AI SPECIALISTS",
   "shell_note": "Vite/React scaffold — Phase 11b. Real shell and i18n (automatic language detection), still no business screens.",
-  "ticker_loading": "Loading market data…"
+  "ticker_loading": "Loading market data…",
+  "err_login_fields": "Fill in email and password.",
+  "err_reg_fields": "Fill in email and password.",
+  "err_reg_pass_len": "Password must be at least 8 characters.",
+  "err_login_default": "Incorrect email or password.",
+  "err_reg_default": "Error creating account.",
+  "err_no_connection": "No connection. Please try again.",
+  "btn_sending": "Sending..."
 }

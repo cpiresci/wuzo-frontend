@@ -48,10 +48,17 @@
   "err_server_wake": "⏳ Servidor iniciando, por favor espera...",
   "login_placeholder_email": "tu@email.com",
   "login_placeholder_pass": "Contraseña",
-  "reg_placeholder_pass": "Contraseña (mínimo 4 caracteres)",
+  "reg_placeholder_pass": "Contraseña (mínimo 8 caracteres)",
   "lang_label": "Idioma",
   "lang_instruction": "Responde en español.",
   "shell_tagline": "RADIOGRAFÍA DE CARTERA · 16 ESPECIALISTAS IA",
   "shell_note": "Scaffold Vite/React — Fase 11b. Shell e i18n reales (detección automática de idioma), todavía sin pantallas de negocio.",
-  "ticker_loading": "Cargando mercado…"
+  "ticker_loading": "Cargando mercado…",
+  "err_login_fields": "Completa el email y la contraseña.",
+  "err_reg_fields": "Completa el email y la contraseña.",
+  "err_reg_pass_len": "La contraseña debe tener mínimo 8 caracteres.",
+  "err_login_default": "Email o contraseña incorrectos.",
+  "err_reg_default": "Error al crear la cuenta.",
+  "err_no_connection": "Sin conexión. Intenta de nuevo.",
+  "btn_sending": "Enviando..."
 }
