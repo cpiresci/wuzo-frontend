@@ -23,3 +23,9 @@ export const AGENTS_UI = [
 // backend — só 2 dos 16 participam do preview free; os outros 14 aparecem
 // no grid mas nunca saem do estado "pendente" nesta fase).
 export const FREE_AGENT_IDS = ["consultor_senior", "macroeconomia"];
+
+// Fase 13 — análise PREMIUM roda os 16 agentes. "consultor_senior" não vira
+// um bloco próprio no relatório: seu texto é o veredito final (mesmo
+// skip={consultor_senior:1} do renderFullReport() no nexus-main).
+export const PREMIUM_AGENT_IDS = AGENTS_UI.map((a) => a.id);
+export const PREMIUM_REPORT_AGENT_IDS = AGENTS_UI.filter((a) => a.id !== "consultor_senior").map((a) => a.id);

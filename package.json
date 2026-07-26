@@ -1,7 +1,7 @@
 {
   "name": "wuzo-frontend",
   "private": true,
-  "version": "0.14.0-fase12",
+  "version": "0.15.0-fase13",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "i18next": "^23.15.1",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "marked": "^18.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "i18next": "^23.15.1",
-    "react-i18next": "^15.0.2",
-    "i18next-browser-languagedetector": "^8.0.0"
+    "react-i18next": "^15.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",

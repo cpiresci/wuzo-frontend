@@ -780,6 +780,40 @@ textarea::placeholder {
   color: var(--gr);
 }
 
+/* ── Fase 13 — blocos de agente do relatório completo (port de .agent-block/
+   .agent-block-title/.agent-block-body do nexus-main) ── */
+.agent-block {
+  background: linear-gradient(135deg, rgba(180, 140, 50, 0.04), rgba(180, 140, 50, 0.01));
+  border: 1px solid var(--bd2);
+  border-radius: var(--r);
+  border-left: 3px solid var(--g);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.agent-block-title {
+  color: var(--g2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--bd);
+  padding-bottom: 4px;
+}
+.agent-block-body {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--tx);
+}
+.agent-block-body strong {
+  color: var(--g2);
+}
+.agent-block-body ul,
+.agent-block-body ol {
+  padding-left: 1.2em;
+  margin: 6px 0;
+}
+
 /* ── veredito (port de .verdict-card/.verdict-title/.vline/.verdict-body) ── */
 .verdict-card {
   background: linear-gradient(135deg, rgba(180, 140, 50, 0.07), rgba(180, 140, 50, 0.02), rgba(3, 3, 2, 0.5));
