@@ -3,9 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 
 // Fase 12 — port de #sec-free / renderFreeResult() (nexus-main). O CTA de
-// lock abre o cadastro (já portado na Fase 11c) quando não logado — o
-// checkout de créditos em si (startCheckout/handlePremiumFromFree) ainda
-// não foi portado, fica pra próxima fase.
+// lock abre o cadastro (já portado na Fase 11c) quando não logado.
+// Fase 14 — quando logado, chama onRequestPremium(prompt) de verdade
+// (POST /api/analyze/premium — debita crédito no servidor). O checkout de
+// créditos (Stripe) em si continua fora de escopo — isso é a Fase 11f.
 function formatVerdict(verdict) {
   return (verdict || "")
     .split("\n")
@@ -28,7 +29,7 @@ function tagFor(score) {
   return { cls: "svt-bom", text: "✓ BOM — OTIMIZAÇÕES POSSÍVEIS" };
 }
 
-export default function FreeResult({ verdict, score }) {
+export default function FreeResult({ verdict, score, prompt, onRequestPremium }) {
   const { t } = useTranslation();
   const { isLoggedIn, openRegister } = useAuth();
   const [displayScore, setDisplayScore] = useState(0);
@@ -63,8 +64,10 @@ export default function FreeResult({ verdict, score }) {
       openRegister();
       return;
     }
-    // Checkout/análise premium ainda não portados — fase seguinte.
-    window.alert("Relatório completo chega na próxima fase da migração.");
+    // Fase 14 — chamada real. Debita 1 crédito no servidor se der certo;
+    // se não tiver crédito, onRequestPremium mostra o erro amigável (a
+    // compra em si — Stripe checkout — ainda é a Fase 11f).
+    onRequestPremium?.(prompt);
   }
 
   return (

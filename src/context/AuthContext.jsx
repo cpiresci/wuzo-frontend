@@ -76,6 +76,14 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
+  // Fase 14 — POST /api/analyze/premium debita crédito no servidor e devolve
+  // credits_remaining na resposta; isso atualiza o badge sem precisar
+  // refazer GET /me. Não busca nada sozinho — só aceita o número que quem
+  // chamou já tem em mãos.
+  const setCredits = useCallback((n) => {
+    setUser((prev) => (prev ? { ...prev, credits: n } : prev));
+  }, []);
+
   const value = {
     user,
     ready,
@@ -87,6 +95,7 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
+    setCredits,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
