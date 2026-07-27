@@ -112,7 +112,12 @@ export function usePremiumAnalysis() {
           addLog(t("log_done") || "Concluído.", "ok");
 
           const agents = (data.agents || []).filter((a) => a.id !== "consultor_senior");
-          setResult({ verdict: data.verdict || "", agents, wuzoScore: data.wuzo_score, analysisId: data.analysis_id });
+          // [FIX-PDF-ID] `data.analysis_id` dentro do payload "done" é
+          // sempre 0/quebrado (achado da Fase 9g-4z, replicado em
+          // buildAnalysisStatusPayload) — usar o `analysisId` local (o
+          // mesmo id de analysis_tasks já usado pro polling acima), que é
+          // o único que GET /api/report/pdf/:id de fato aceita.
+          setResult({ verdict: data.verdict || "", agents, wuzoScore: data.wuzo_score, analysisId });
           setPhase("result");
           setBusy(false);
           return;

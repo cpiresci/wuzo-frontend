@@ -55,7 +55,9 @@ export default function App() {
           <Pipeline agentsUi={pa.agentsUi} agentStatus={pa.agentStatus} progress={pa.progress} log={pa.log} done={pa.pipDone} />
         )}
 
-        {pa.phase === "result" && pa.result && <PremiumResult verdict={pa.result.verdict} agents={pa.result.agents} />}
+        {pa.phase === "result" && pa.result && (
+          <PremiumResult verdict={pa.result.verdict} agents={pa.result.agents} analysisId={pa.result.analysisId} />
+        )}
 
         {import.meta.env.DEV && <DevPremiumPreview />}
       </div>

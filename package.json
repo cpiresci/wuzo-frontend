@@ -1,7 +1,7 @@
 {
   "name": "wuzo-frontend",
   "private": true,
-  "version": "0.16.0-fase14",
+  "version": "0.17.0-fase11f1",
   "type": "module",
   "scripts": {
     "dev": "vite",
