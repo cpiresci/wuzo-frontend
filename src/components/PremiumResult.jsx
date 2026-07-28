@@ -2,16 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { marked } from "marked";
 import { downloadPremiumPdf } from "../lib/pdfApi";
+import { generateShareImage } from "../lib/shareImage";
 
 // Fase 13 — port de #sec-full / renderFullReport() (nexus-main). Recebe
 // { verdict, agents:[{id,emoji,name,analysis}] } já resolvido — não sabe (e
 // não precisa saber) se veio do fixture de preview ou de uma análise real.
 // Fase 11f-1 — botão de PDF agora chama downloadPremiumPdf() de verdade
-// (GET /api/report/pdf/:id). Botão de share (Stories) segue desabilitado —
-// o motor de geração de imagem (html2canvas + score ring/gauge/network,
-// ~400 linhas em generateShareImage() no nexus-main) é uma subfase própria,
-// ainda não portada, pelo mesmo princípio de escopo fechado do resto do
-// PROMPT_MASTER.
+// (GET /api/report/pdf/:id).
+// Fase 11f-2 — botão de share (Stories) agora chama generateShareImage()
+// de verdade (src/lib/shareImage.js, porte do motor html2canvas +
+// score ring/gauge/network do nexus-main). Sem wuzoScore (preview dev),
+// o motor usa 65 como default — mesmo comportamento do original.
 function formatBold(line) {
   const parts = line.split(/\*\*(.*?)\*\*/g);
   return parts.map((part, i) => (i % 2 === 1 ? <b key={i}>{part}</b> : part));
@@ -43,11 +44,13 @@ function AgentBlock({ agent }) {
   );
 }
 
-export default function PremiumResult({ verdict, agents, analysisId }) {
+export default function PremiumResult({ verdict, agents, analysisId, wuzoScore }) {
   const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfMsg, setPdfMsg] = useState(null); // { ok:boolean, text:string }
+  const [shareBusy, setShareBusy] = useState(false);
+  const [shareMsg, setShareMsg] = useState(null); // { ok:boolean, text:string }
 
   useEffect(() => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,6 +72,26 @@ export default function PremiumResult({ verdict, agents, analysisId }) {
             : "PDF baixado com sucesso!",
         }),
     });
+  }
+
+  async function handleShare() {
+    if (shareBusy) return;
+    setShareMsg(null);
+    setShareBusy(true);
+    try {
+      const { shared, cancelled } = await generateShareImage({ agents, verdict, wuzoScore });
+      if (cancelled) {
+        // usuário cancelou o share nativo — não é erro, sem mensagem.
+      } else if (shared) {
+        setShareMsg({ ok: true, text: "Compartilhado!" });
+      } else {
+        setShareMsg({ ok: true, text: "Imagem gerada — salve pelo overlay que abriu." });
+      }
+    } catch (err) {
+      setShareMsg({ ok: false, text: `Erro ao gerar imagem: ${err.message || "falha desconhecida."}` });
+    } finally {
+      setShareBusy(false);
+    }
   }
 
   return (
@@ -115,11 +138,22 @@ export default function PremiumResult({ verdict, agents, analysisId }) {
             background: "linear-gradient(135deg,#1a1a2e,#6a0dad)",
             color: "#fff",
           }}
-          disabled
-          title="Fase 11f"
+          disabled={shareBusy}
+          onClick={handleShare}
         >
-          📸 COMPARTILHAR NOS STORIES
+          {shareBusy ? "⏳ Gerando..." : "📸 COMPARTILHAR NOS STORIES"}
         </button>
+        {shareMsg && (
+          <div
+            style={{
+              marginTop: 8,
+              fontSize: ".8rem",
+              color: shareMsg.ok ? "var(--g)" : "#e5484d",
+            }}
+          >
+            {shareMsg.text}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "name": "wuzo-frontend",
   "private": true,
-  "version": "0.17.0-fase11f1",
+  "version": "0.18.0-fase11f2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.0.0",
     "marked": "^18.0.7",

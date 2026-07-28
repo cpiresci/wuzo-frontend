@@ -56,7 +56,12 @@ export default function App() {
         )}
 
         {pa.phase === "result" && pa.result && (
-          <PremiumResult verdict={pa.result.verdict} agents={pa.result.agents} analysisId={pa.result.analysisId} />
+          <PremiumResult
+            verdict={pa.result.verdict}
+            agents={pa.result.agents}
+            analysisId={pa.result.analysisId}
+            wuzoScore={pa.result.wuzoScore}
+          />
         )}
 
         {import.meta.env.DEV && <DevPremiumPreview />}
